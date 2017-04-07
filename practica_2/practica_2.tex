@@ -10,8 +10,11 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 
+\usepackage{multirow}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.7em}
+\def\arraystretch{1.5}
 
 \title{\textsc{Pràctica 2} \\
 	\normalsize Aplicació del mètode dels elements finits a l'anàlisi d'una peça prismàtica}
@@ -105,11 +108,58 @@ $$
 P = \frac{m \cdot g}{A_{neta}} = \frac{5\cdot10^3 \cdot 9,81}{630 \cdot 100} = 0,779\ \frac{N}{mm^2}
 $$
 
-Així doncs la càrrega $q$ serà la pressió exercida entre l'amplada de la barra pel que:
+Així doncs la càrrega $q$ serà la pressió exercida per l'amplada de la barra pel que:
 $$
-q = \frac{P}{b} = \frac{0,779}{15} = 0,05191\ \frac{N}{mm} = \boldsymbol{51,91 \ \frac{N}{m}}
+q = \frac{P}{b} = 0,779 \cdot 15 = \boldsymbol{11,67 \ \frac{N}{mm}} 
 $$
 
 \section{Part I: Simulació amb l'element finit plane 182}
+
+\subsection{Anàlisi d'un model amb una malla poc refinada amb 4 elements i 10 elements en longitud (4x10 = 40 elements finits)}
+
+\textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y, \max}$)}
+
+\textbf{Anàlisi de les tensions normals ($\sigma_x$)}
+
+\textbf{Anàlisi de les tensions tangencials ($\tau_{xy}$)}
+
+\textbf{Càlcul del coeficient de seguretat de la peça (criteri de Von Mises)}
+
+\subsection{Anàlisi d'un model amb una malla refinada amb 10 elements en alçada i 40 elements en longitud (10x40 = 400 elements finits)}
+\textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y,\max}$)}
+
+\textbf{Anàlisi de les tensions normals ($\sigma_x$)}
+
+\subsection{Comparació dels resultats obtinguts amb els resultats teòrics}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|r|r|r|}
+		\cline{4-5}
+		\multicolumn{3}{c|}{\multirow{2}{*}{}} & \textbf{Malla poc refinada} & \textbf{Malla refinada} \\
+		\multicolumn{3}{c|}{} & 4x10 = 40 elements & 10x40 = 400 elements \\
+		\hline
+		\textbf{Paràmetre} & \textbf{Unitats} & \textbf{Solució teòrica} & \textbf{Valor} & \textbf{Valor} \\
+		\hline
+		$\sigma_{x,\max+}$ & $N/mm^2$ & 133,31 & 128,86 & 131,37 \\
+		$\sigma_{x,\max-}$ & $N/mm^2$ & -133,31 & -128,86 & -131,37 \\
+		$\tau_{xy,\max+}$ & $N/mm^2$ & 8,88 & 7,2 & 9,24 \\
+		$\tau_{xy,\max-}$ & $N/mm^2$ & -8,88 & -7,2 & -9,24 \\
+		$\delta_{y,\max}$ & $mm$ & 1,45 & 1,42 & 1,45 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+
+\subsection{Anàlisi d'un model amb una malla refinada amb 10 elements }
+
+\section{Part 2: Simulació amb l'element finit BEAM 188}
+\textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y,max}$)}
+
+\textbf{Anàlisi del diagrama de moments flectors ($M_z$)}
+
+\textbf{Anàlisi del diagrama d'esforços tallants ($T_y$)}
+
 
 \end{document}
