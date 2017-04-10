@@ -16,6 +16,7 @@
 \usepackage{tikz-dimline}
 \usepackage{subfigure}
 
+\pgfplotsset{compat=1.14}
 \usetikzlibrary{patterns}
 
 \setlength{\parindent}{0pt}
@@ -128,12 +129,11 @@ $$
 q = \frac{P}{b} = 0,779 \cdot 15 = \boldsymbol{11,67 \ \frac{N}{mm}} 
 $$
 
+\pagebreak
 \section{Part I: Simulació amb l'element finit plane 182}
-
 \subsection{Anàlisi d'un model amb una malla poc refinada amb 4 elements i 10 elements en longitud (4x10 = 40 elements finits)}
 
 \textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y, \max}$)}
-
 \begin{figure}[H]
 	\subfigure[Deformació]{
 		\includegraphics[width=\imgS]{images/40_deformed}
@@ -148,8 +148,9 @@ $$
 	\label{fig:40_displacement}
 \end{figure}
 
-\textbf{Anàlisi de les tensions normals ($\sigma_x$)}
+Com es pot observar hi ha un desplaçament màxim de $\delta_{y, \max} = 1,42 mm$ situat al punt mig de la peça.
 
+\textbf{Anàlisi de les tensions normals ($\sigma_x$)}
 \begin{figure}[H]
 	\subfigure[Mapa de tensions normals {$\sigma_x$}]{
 		\includegraphics[width=\imgS]{images/40_stress}
@@ -163,6 +164,8 @@ $$
 	\caption{Resultats de les tensions normals}
 	\label{fig:40_stress_results}
 \end{figure}
+
+Pel que fa a les tensions normals $\sigma_x$ els valors màxims i mínims també es troben al centre de la peça amb un valor de $\sigma_{x,\max+} = 128.86 MPa$ i $\sigma_{x,\max-} = -128.86 MPa$.
 
 \textbf{Anàlisi de les tensions tangencials ($\tau_{xy}$)}
 
@@ -179,15 +182,17 @@ $$
 	\caption{Resultats de les tensions tangencials}
 	\label{fig:40_shear}
 \end{figure}
+Les tensions tangencials màximes es troben als extrems de la peça, s'observa un valor de $\tau_{xy,\max+} = 7.24 MPa$ i $\tau_{xy,\max-} = -7.24 MPa$. També es pot observar que per aquest mallat que no és gaire refinat, no és clar que el valor que prenguin els resultats siguin del tot correctes.
 
 \textbf{Càlcul del coeficient de seguretat de la peça (criteri de Von Mises)}
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\imgS]{images/40_von_misses}
 	\caption{Mapa de tensions equivalents de Von Misses ($\sigma_{eq,VM}$)}
 	\label{fig:40_von_misses}
 \end{figure}
+
+Donat que s'obté un valor de $\sigma_{eq,VM} = 129,08$ i que $\sigma_{adm} = f_y = 235 MPa$, el coeficient de seguretat serà de $\gamma_{SE} = \frac{\sigma_{adm}}{\sigma_{eq,VM}} = 1,82$.
 
 \subsection{Anàlisi d'un model amb una malla refinada amb 10 elements en alçada i 40 elements en longitud (10x40 = 400 elements finits)}
 \textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y, \max}$)}
@@ -318,15 +323,39 @@ Indicacions inicials:
 \begin{itemize}
 	\item Per a la resolució d'aquesta qüestió, cal considerar els resultats del model amb \textbf{malla refinada} (400 elements) de la part 1.
 	\item Dins de la secció crítica, es demana analitzar el punt situat a una distància $y=-h/2$ de l'eix neutre.
-\end{itemize}
-
 \begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
-		\draw[dashed, gray] (-1.5, 0) -- (1.5, 0);
-		\draw[dashed, gray] (0, -2.25) -- (0, 2.25);
+		\draw[dashed, gray] (-1.5, 0) -- (1.5, 0) node[at start, anchor = east, black]{z};
+		\draw[dashed, gray] (0, -2.25) -- (0, 2.25) node[black]{y};
 		\draw[pattern = north east lines, pattern color = gray] (-.75, -2) rectangle (.75, 2);
+		\dimline[extension start length=-1.25cm,
+			extension end length=-.5cm,
+			extension start style={black, thin},
+			extension end   style={black, thin},
+		]{(2, -2)}{(2, 0)}{$y=-\frac{h}{2}$};
+		\dimline[extension start length=-2.25cm,
+			extension end length=-2.25cm,
+			extension start style={black, thin},
+			extension end   style={black, thin},
+		]{(3, -2)}{(3, 2)}{$h=40mm$};
+		\dimline[extension start length=-1cm,
+			extension end length=-1cm,
+			extension start style={black, thin},
+			extension end   style={black, thin},
+			label style={below=0.8ex}
+		]{(-.75, -3)}{(.75, -3)}{$b=15mm$};
+		\fill (0, -2) circle[radius=2pt];
 	\end{tikzpicture}
 \end{figure}
-
+	\item Els components del tensor tensió $\sigma_y$, $\sigma_z$ i $\tau_{xy}$ són nuls d'acord amb les hipòtesis de peça prismàtica
+	$$
+	\left[\sigma\right]_{x,y,z,\text{punt 1}} = 
+	\begin{bmatrix}
+		\sigma_x & \tau_{xy} & \tau_{xz} \\
+		\tau_{xy} & 0 & 0 \\
+		\tau_{xz} & 0 & 0
+	\end{bmatrix}
+	$$
+\end{itemize}
 \end{document}
