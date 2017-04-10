@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[margin=2cm]{geometry}
+\usepackage[margin=1.9cm]{geometry}
 \usepackage{fontspec}
 \usepackage[catalan]{babel}
 
@@ -10,11 +10,11 @@
 
 \usepackage{multirow}
 
-% For figure
+% For figures
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{tikz-dimline}
-\usepackage{subfigure}
+\usepackage{subcaption}
 
 \pgfplotsset{compat=1.14}
 \usetikzlibrary{patterns}
@@ -22,6 +22,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.7em}
 \def\arraystretch{1.5}
+\def\imgS{0.42\textwidth}
 
 \title{\textsc{Pràctica 2} \\
 	\normalsize Aplicació del mètode dels elements finits a l'anàlisi d'una peça prismàtica}
@@ -29,7 +30,6 @@
 \author{Joan Marcè \and Iñigo Moreno \and Esteve Tarragó}
 \date{}
 
-\def\imgS{0.49\textwidth}
 
 \begin{document}
 \maketitle
@@ -135,54 +135,60 @@ $$
 
 \textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y, \max}$)}
 \begin{figure}[H]
-	\subfigure[Deformació]{
-		\includegraphics[width=\imgS]{images/40_deformed}
-	}
-	\label{fig:40_deformed}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/40_deformed}
+		\caption{Deformació}
+		\label{fig:40_deformed}
+	\end{subfigure}
 	\hfill
-	\subfigure[Mapa de desplaçaments verticals UY]{
-		\includegraphics[width=\imgS]{images/40_UY}
-	}
-	\label{fig:40_UY}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/40_UY}
+		\caption{Mapa de desplaçaments verticals UY}
+		\label{fig:40_UY}
+	\end{subfigure}
 	\caption{Resultats del desplaçament}
 	\label{fig:40_displacement}
 \end{figure}
 
-Com es pot observar hi ha un desplaçament màxim de $\delta_{y, \max} = 1,42 mm$ situat al punt mig de la peça.
+Com es pot observar a la \autoref{fig:40_UY} hi ha un desplaçament màxim de $\delta_{y, \max} = 1,42 mm$ situat al punt mig de la peça.
 
 \textbf{Anàlisi de les tensions normals ($\sigma_x$)}
 \begin{figure}[H]
-	\subfigure[Mapa de tensions normals {$\sigma_x$}]{
-		\includegraphics[width=\imgS]{images/40_stress}
-	}
-	\label{fig:40_stress}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/40_stress}
+		\caption{Mapa de tensions normals {$\sigma_x$}}
+		\label{fig:40_stress}
+	\end{subfigure}
 	\hfill
-	\subfigure[Distribució de tensions normals a la secció (\emph{path})]{
-		\includegraphics[width=\imgS]{images/40_stress_path}
-	}
-	\label{fig:40_stress_path}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/40_stress_path}
+		\caption{Distribució de tensions normals a la secció (\emph{path})}
+		\label{fig:40_stress_path}
+	\end{subfigure}
 	\caption{Resultats de les tensions normals}
 	\label{fig:40_stress_results}
 \end{figure}
 
 Pel que fa a les tensions normals $\sigma_x$ els valors màxims i mínims també es troben al centre de la peça amb un valor de $\sigma_{x,\max+} = 128.86 MPa$ i $\sigma_{x,\max-} = -128.86 MPa$.
 
+\pagebreak
 \textbf{Anàlisi de les tensions tangencials ($\tau_{xy}$)}
-
 \begin{figure}[H]
-	\subfigure[Mapa de tensions tangencials {$\tau_{xy}$}]{
-		\includegraphics[width=\imgS]{images/40_SXY}
-	}
-	\label{fig:40_SXY}
+	\begin{subfigure}[t]{\imgS}
+		\includegraphics[width=\textwidth]{images/40_SXY}
+		\caption{Mapa de tensions tangencials {$\tau_{xy}$}}
+		\label{fig:40_SXY}
+	\end{subfigure}
 	\hfill
-	\subfigure[Distribució de tensions tangencials a una secció propera a un extrem (\emph{path})]{
-		\includegraphics[width=\imgS]{images/40_SXY_path}
-	}
-	\label{fig:40_SXY_path}
+	\begin{subfigure}[t]{\imgS}
+		\includegraphics[width=\textwidth]{images/40_SXY_path}
+		\caption{Distribució de tensions tangencials a una secció propera a un extrem (\emph{path})}
+		\label{fig:40_SXY_path}
+	\end{subfigure}
 	\caption{Resultats de les tensions tangencials}
 	\label{fig:40_shear}
 \end{figure}
-Les tensions tangencials màximes es troben als extrems de la peça, s'observa un valor de $\tau_{xy,\max+} = 7.24 MPa$ i $\tau_{xy,\max-} = -7.24 MPa$. També es pot observar que per aquest mallat que no és gaire refinat, no és clar que el valor que prenguin els resultats siguin del tot correctes.
+Les tensions tangencials màximes es troben als extrems de la peça, s'observa un valor de $\tau_{xy,\max+} = 7.24 MPa$ i $\tau_{xy,\max-} = -7.24 MPa$. També es pot observar que per aquest mallat que no és gaire refinat, no és clar que el valor que prenguin els resultats siguin del tot correctes ja que no sembla haver-hi continuïtat entre els elements.
 
 \textbf{Càlcul del coeficient de seguretat de la peça (criteri de Von Mises)}
 \begin{figure}[H]
@@ -192,68 +198,75 @@ Les tensions tangencials màximes es troben als extrems de la peça, s'observa u
 	\label{fig:40_von_misses}
 \end{figure}
 
-Donat que s'obté un valor de $\sigma_{eq,VM} = 129,08$ i que $\sigma_{adm} = f_y = 235 MPa$, el coeficient de seguretat serà de $\gamma_{SE} = \frac{\sigma_{adm}}{\sigma_{eq,VM}} = 1,82$.
+Donat que s'obté un valor de $\sigma_{eq,VM} = \sigma_{adm} = 129,08$ i que la tensió del límit elàstic és $f_y = 235 MPa$, el coeficient de seguretat serà de $\gamma_{SE} = \frac{f_y}{\sigma_{adm}} = 1,82$.
 
+\pagebreak
 \subsection{Anàlisi d'un model amb una malla refinada amb 10 elements en alçada i 40 elements en longitud (10x40 = 400 elements finits)}
 \textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y, \max}$)}
-
 \begin{figure}[H]
-	\subfigure[Deformació]{
-		\includegraphics[width=\imgS]{images/400_deformed}
-	}
-	\label{fig:400_deformed}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/400_deformed}
+		\caption{Deformació}
+		\label{fig:400_deformed}
+	\end{subfigure}
 	\hfill
-	\subfigure[Mapa de desplaçaments verticals UY]{
-		\includegraphics[width=\imgS]{images/400_UY}
-	}
-	\label{fig:400_UY}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/400_UY}
+		\caption{Mapa de desplaçaments verticals UY}
+		\label{fig:400_UY}
+	\end{subfigure}
 	\caption{Resultats del desplaçament}
 	\label{fig:400_displacement}
 \end{figure}
+Es pot veure a la \autoref{fig:400_UY} que hi ha un desplaçament màxim $\delta_{y,\max} = 1,45mm$ situat al punt mig de la peça. 
 
 \textbf{Anàlisi de les tensions normals ($\sigma_x$)}
-
 \begin{figure}[H]
-	\subfigure[Mapa de tensions normals {$\sigma_x$}]{
-		\includegraphics[width=\imgS]{images/400_stress}
-	}
-	\label{fig:400_stress}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/400_stress}
+		\caption{Mapa de tensions normals {$\sigma_x$}}
+		\label{fig:400_stress}
+	\end{subfigure}
 	\hfill
-	\subfigure[Distribució de tensions normals a la secció (\emph{path})]{
-		\includegraphics[width=\imgS]{images/400_stress_path}
-	}
-	\label{fig:400_stress_path}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/400_stress_path}
+		\caption{Distribució de tensions normals a la secció (\emph{path})}
+		\label{fig:400_stress_path}
+	\end{subfigure}
 	\caption{Resultats de les tensions normals}
 	\label{fig:400_stress_results}
 \end{figure}
+Les tensions normals també són màximes al punt mig de la peça, les màximes positives es troben a la part inferior amb valor $\sigma_{x,\max+} = 131,37 MPa$ i les negatives a la part superior amb valor $\sigma_{x,\max-} = -131,37 MPa$. 
 
+\pagebreak
 \textbf{Anàlisi de les tensions tangencials ($\tau_{xy}$)}
-
 \begin{figure}[H]
-	\subfigure[Mapa de tensions tangencials {$\tau_{xy}$}]{
-		\includegraphics[width=\imgS]{images/400_SXY}
-	}
-	\label{fig:400_SXY}
+	\begin{subfigure}[t]{\imgS}
+		\includegraphics[width=\textwidth]{images/400_SXY}
+		\caption{Mapa de tensions tangencials {$\tau_{xy}$}}
+		\label{fig:400_SXY}
+	\end{subfigure}
 	\hfill
-	\subfigure[Distribució de tensions tangencials a una secció propera a un extrem (\emph{path})]{
-		\includegraphics[width=\imgS]{images/400_SXY_path}
-	}
-	\label{fig:400_SXY_path}
+	\begin{subfigure}[t]{\imgS}
+		\includegraphics[width=\textwidth]{images/400_SXY_path}
+		\caption{Distribució de tensions tangencials a una secció propera a un extrem (\emph{path})}
+		\label{fig:400_SXY_path}
+	\end{subfigure}
 	\caption{Resultats de les tensions tangencials}
 	\label{fig:400_shear}
 \end{figure}
+Les tensions tangencials són màximes als extrems de la peça i prenen valors $\tau_{xy,\max+} = 9,24 MPa$ i $\tau_{xy,\max-} = -9,24 MPa$. En comparació amb el mallat anterior aquí sí que s'observa més continuïtat entre els elements.
 
 \textbf{Càlcul del coeficient de seguretat de la peça (criteri de Von Mises)}
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\imgS]{images/400_von_misses}
 	\caption{Mapa de tensions equivalents de Von Misses ($\sigma_{eq,VM}$)}
 	\label{fig:400_von_misses}
 \end{figure}
+Donat que el valor màxim de la tensió equivalent de Von Misses és de $\sigma_{eq,VM} = \sigma_{adm} = 131,46 MPa$ i que la tensió del límit elàstic és $f_y = 235 MPa$ el coeficient de seguretat serà $\gamma_{SE} = \frac{f_y}{\sigma_{adm}} = 1,79$.
 
 \subsection{Comparació dels resultats obtinguts amb els resultats teòrics}
-
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|l|c|r|r|r|}
@@ -271,58 +284,58 @@ Donat que s'obté un valor de $\sigma_{eq,VM} = 129,08$ i que $\sigma_{adm} = f_
 		\hline
 	\end{tabular}
 \end{table}
-
-
-
-\subsection{Anàlisi d'un model amb una malla refinada amb 10 elements }
+Es pot observar que els resultats amb la malla refinada són molt més propers a la solució teòrica que els resultats amb la malla poc refinada. En concret, la deformació màxima pren el mateix valor que a la solució teòrica.
 
 \section{Part 2: Simulació amb l'element finit BEAM 188}
 \textbf{Anàlisi de la deformada i del desplaçament vertical màxim ($\delta_{y,max}$)}
 
 \begin{figure}[H]
-	\subfigure[Deformació]{
-		\includegraphics[width=\imgS]{images/b_deformed}
-	}
-	\label{fig:b_deformed}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_deformed}
+		\caption{Deformació}
+		\label{fig:b_deformed}
+	\end{subfigure}
 	\hfill
-	\subfigure[Mapa de desplaçaments verticals UY]{
-		\includegraphics[width=\imgS]{images/b_UY}
-	}
-	\label{fig:b_UY}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_UY}
+		\caption{Mapa de desplaçaments verticals UY}
+		\label{fig:b_UY}
+	\end{subfigure}
 	\caption{Resultats del desplaçament}
 	\label{fig:b_displacement}
 \end{figure}
+El desplaçament vertical màxim és de $\delta_{y,\max} = -1,45mm$. 
 
 \textbf{Anàlisi del diagrama de moments flectors ($M_z$)}
 \begin{figure}[H]
-	\subfigure{
-		\includegraphics[width=\imgS]{images/b_MZ}
-	}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_MZ}
+	\end{subfigure}
 	\hfill
-	\subfigure{
-		\includegraphics[width=\imgS]{images/b_MZ_path}
-	}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_MZ_path}
+	\end{subfigure}
 	\caption{Diagrama de moments flectors $M_z$}
 \end{figure}
+Pel que fa als moments flectors es pot veure que segueixen una funció quadràtica amb punt màxim al centre i valor $M_{z,\max} = 525,15 N\cdot m$.
 
 \textbf{Anàlisi del diagrama d'esforços tallants ($T_y$)}
 \begin{figure}[H]
-	\subfigure{
-		\includegraphics[width=\imgS]{images/b_TY}
-	}
-	\subfigure{
-		\includegraphics[width=\imgS]{images/b_TY_path}
-	}
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_TY}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{\imgS}
+		\includegraphics[width=\textwidth]{images/b_TY_path}
+	\end{subfigure}
 	\caption{Diagrama d'esforços tallants $T_y$}
 \end{figure}
+Els esforços tallants són màxims als extrems i neutres al punt mig.
 
 \section{Part 3: Expressar l'estat de tensió a un punt crític de la peça}
 \subsection{Determinar el tensor tensió a un punt crític de la tensió}
 
-Indicacions inicials:
-\begin{itemize}
-	\item Per a la resolució d'aquesta qüestió, cal considerar els resultats del model amb \textbf{malla refinada} (400 elements) de la part 1.
-	\item Dins de la secció crítica, es demana analitzar el punt situat a una distància $y=-h/2$ de l'eix neutre.
+Per a la resolució d'aquesta qüestió, s'han considerat els resultats del model amb malla refinada (400 elements). S'ha analitzat la secció crítica (centre de la peça) i en concret el punt situat a una distància $y=-\frac{h}{2}$ de l'eix neutre.
 \begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
@@ -348,14 +361,19 @@ Indicacions inicials:
 		\fill (0, -2) circle[radius=2pt];
 	\end{tikzpicture}
 \end{figure}
-	\item Els components del tensor tensió $\sigma_y$, $\sigma_z$ i $\tau_{xy}$ són nuls d'acord amb les hipòtesis de peça prismàtica
-	$$
-	\left[\sigma\right]_{x,y,z,\text{punt 1}} = 
-	\begin{bmatrix}
-		\sigma_x & \tau_{xy} & \tau_{xz} \\
-		\tau_{xy} & 0 & 0 \\
-		\tau_{xz} & 0 & 0
-	\end{bmatrix}
-	$$
-\end{itemize}
+
+Els components del tensor tensió $\sigma_y$, $\sigma_z$ i $\tau_{xy}$ són nuls d'acord amb les hipòtesis de peça prismàtica pel que el tensor tensió final és:
+$$
+\left[\sigma\right]_{x,y,z,\text{punt 1}} = 
+\begin{bmatrix}
+\sigma_x & \tau_{xy} & \tau_{xz} \\
+\tau_{xy} & 0 & 0 \\
+\tau_{xz} & 0 & 0
+\end{bmatrix} = 
+\begin{bmatrix}
+131,37 & -6,32\cdot 10^{-11} & 0 \\
+-6,32\cdot 10^{-11} & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+$$
 \end{document}
