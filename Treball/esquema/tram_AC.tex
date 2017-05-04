@@ -3,38 +3,49 @@
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{shapes, patterns}
+\usetikzlibrary{shapes, patterns, calc}
 
 \begin{document}
-\begin{tikzpicture}[
+	\begin{tikzpicture}[
 	label/.style={circle,draw},
 	gFill/.style={Green, pattern=north west lines, pattern color=Green},
 	arrow/.style={latex-latex}
-]
-\draw[thick] (0, 0) -- (8, 0);
-\node [label] at (-1, 0) {A};
-\node [label] at (9, 0) {C};
-
-\draw (0, 0) -- (.5, -.8) -- (-.5, -.8) -- cycle;
-
-\draw [arrow] (0, -2) -- (8, -2) node[midway, above] {$l_1$};
-
-% Tallant
-\node [label] at (-1, -4) {T};
-\draw (0, -4) -- (8, -4);
-\draw[gFill] (0, -4) rectangle (8, -3);
-\node[Green] at (-0.5, -3) {$R_A$};
-
-% Moment
-\node [label] at (-1, -6) {M};
-\draw (0, -6) -- (8, -6);
-\draw[gFill] (0, -6) -- (8, -5) -- (8, -6) -- cycle;
-\draw[Green, dashed] (0, -5) -- (8, -5);
-\node[Green] at (-0.5, -5) {$R_A \cdot l_1$};
-
-\draw (0, -1) -- (0, -8);
-\draw (8, -0.2) -- (8, -8);
-
-\draw[-latex, Green, thick] (0, -1) -- (0, 0) node[at start, left] {$R_A$};
-\end{tikzpicture}
+	]
+	
+	\coordinate (A) at (0, 0);
+	\coordinate (C) at (8, 0);
+	
+	\draw[very thick] (A) -- (C);
+	\node [label] at ($(A) + (-1,0)$) {A};
+	\node [label] at ($(C) + (1, 0)$) {C};
+	
+	\draw [arrow] ($(A) - (0, 2)$) -- ($(C) - (0, 2)$) node[midway, above] {$l_1$};
+	
+	\draw (A) -- ($(A) - (.4,.7)$) -- ($(A) + (+.4, -.7)$) -- cycle;
+	
+	\coordinate (N1) at ($(A)$);
+	\coordinate (N2) at ($(C)$);
+	\coordinate (T1) at ($(N1) - (0, 4)$);
+	\coordinate (T2) at ($(N2) - (0, 4)$);
+	\coordinate (M1) at ($(T1) - (0, 2)$);
+	\coordinate (M2) at ($(T2) - (0, 2)$);
+	
+	% Tallant
+	\node [label] at ($(T1) - (1, 0)$) {T};
+	\draw[gFill] (T1) rectangle ($(T2) + (0, 1)$);
+	\draw[thick] (T1) -- (T2);
+	\node[Green, anchor=east] at ($(T1) + (0, 1)$) {$R_A$};
+	
+	% Moment
+	\node [label] at ($(M1) - (1, 0)$) {M};
+	\draw[gFill] (M1) -- ($(M2) - (0, 1)$) -- (M2) -- cycle;
+	\draw[thick] (M1) -- (M2);
+	\draw[Green, dashed] ($(M1) - (0, 1)$) -- ($(M2) - (0, 1)$);
+	\node[Green, anchor=east] at ($(M1) - (0, 1)$) {$R_A \cdot l_1$};
+	
+	\draw ($(A) - (0, 1.2)$) -- ($(M1) - (0, 2)$);
+	\draw ($(C) - (0, .2)$) -- ($(M2) - (0, 2)$);
+	
+	\draw[Green, thick,-latex] ($(A) - (0, 1)$) -- (A) node [at start, left] {$R_A$};
+	\end{tikzpicture}
 \end{document}
