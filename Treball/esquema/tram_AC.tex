@@ -9,7 +9,8 @@
 	\begin{tikzpicture}[
 	label/.style={circle,draw},
 	gFill/.style={Green, pattern=north west lines, pattern color=Green},
-	arrow/.style={latex-latex}
+	arrow/.style={latex-latex},
+	inSymb/.style={Green, fill=white, circle, draw}
 	]
 	
 	\coordinate (A) at (0, 0);
@@ -27,14 +28,18 @@
 	\coordinate (N2) at ($(C)$);
 	\coordinate (T1) at ($(N1) - (0, 4)$);
 	\coordinate (T2) at ($(N2) - (0, 4)$);
+	\coordinate (T3) at ($(T2) + (0, 1)$);
 	\coordinate (M1) at ($(T1) - (0, 2)$);
 	\coordinate (M2) at ($(T2) - (0, 2)$);
+	\coordinate (M3) at ($(M2) - (0, 1)$);
 	
 	% Tallant
 	\node [label] at ($(T1) - (1, 0)$) {T};
-	\draw[gFill] (T1) rectangle ($(T2) + (0, 1)$);
+	\draw[gFill] (T1) rectangle (T3);
 	\draw[thick] (T1) -- (T2);
 	\node[Green, anchor=east] at ($(T1) + (0, 1)$) {$R_A$};
+	\node[inSymb] at ($(T1)!.5!(T3)$) {$+$};
+	
 	
 	% Moment
 	\node [label] at ($(M1) - (1, 0)$) {M};
@@ -42,6 +47,7 @@
 	\draw[thick] (M1) -- (M2);
 	\draw[Green, dashed] ($(M1) - (0, 1)$) -- ($(M2) - (0, 1)$);
 	\node[Green, anchor=east] at ($(M1) - (0, 1)$) {$R_A \cdot l_1$};
+	\node[inSymb, scale=.8] at ($(M2)!.5!(M3) - (1,0)$) {$+$};
 	
 	\draw ($(A) - (0, 1.2)$) -- ($(M1) - (0, 2)$);
 	\draw ($(C) - (0, .2)$) -- ($(M2) - (0, 2)$);
