@@ -49,14 +49,14 @@
 	\node [label] at ($(N1) - (1, .5)$) {N};
 	\draw[gFill] (N1) rectangle ($(N2) - (0, .5)$);
 	\draw[thick] (N1) -- (N2);
-	\node [Green, anchor=east] at ($(N1) + (0, .5)$) {$R_A \cdot \sin(\phi)$};
+	\node [Green, anchor=east] at ($(N1) + (0, .5)$) {$R_A \cdot \sin(\theta)$};
 	\node[inSymb, scale=.5] at ($(N1)!.5!(N3)$) {$-$};
 	
 	% Tallant
 	\node [label] at ($(T1) - (1, .5)$) {T};
 	\draw[gFill] (T1) rectangle (T3);
 	\draw[thick] (T1) -- (T2);
-	\node[Green, anchor=east] at ($(T1) + (0, .5)$) {$R_A \cdot \cos(\phi)$};
+	\node[Green, anchor=east] at ($(T1) + (0, .5)$) {$R_A \cdot \cos(\theta)$};
 	\node[inSymb, scale=.5] at ($(T1)!.5!(T3)$) {$+$};
 	
 	% Moment

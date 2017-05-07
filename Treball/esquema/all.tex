@@ -5,7 +5,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes, patterns, calc}
 
-\def\angle{20}
+\def\angle{30}
 
 \begin{document}
 	\begin{tikzpicture}[
@@ -19,7 +19,7 @@
 	\coordinate (C) at (6, 0);
 	\coordinate (D) at ($(C) + ({5*cos(\angle)}, -{5*sin(\angle)})$);
 	\coordinate (E) at ($(D) + (2, 0)$);
-	\coordinate (B) at ($(E) + (6, 0)$);
+	\coordinate (B) at ($(E) + (5, 0)$);
 	
 	\draw[very thick] (A) -- (C) -- (D) -- (B);
 	\node [label] at ($(A) + (-1,0)$) {A};
@@ -46,7 +46,7 @@
 	
 	\draw [arrow] ($(D) - (0, 2)$) -- ($(B) - (0, 2)$) node[midway, above] {$l_2$};
 	\draw [arrow] ($(D) - (0, 3)$) -- ($(E) - (0, 3)$) node[midway, above] {$l_P$};
-	\draw [arrow] ($(E) - (0, 3)$) -- ($(B) - (0, 3)$) node[midway, above] {$1,5a$};
+	\draw [arrow] ($(E) - (0, 3)$) -- ($(B) - (0, 3)$) node[midway, above] {$1,25a$};
 	
 	% Tram delimiters
 	\draw ($(A) - (0, 1.2)$) -- ($(A) - (0, 3)$);
